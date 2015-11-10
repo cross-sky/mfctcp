@@ -87,4 +87,6 @@ public:
 	CEdit m_editOnLink;
 	int m_editStartTime;
 	int m_editEndtime;
+
+	void InitWsaAsynSelect(void);
 };

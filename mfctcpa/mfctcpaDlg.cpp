@@ -151,6 +151,9 @@ BOOL CmfctcpaDlg::OnInitDialog()
 	UpdateData(FALSE);
 	pm_Dlg = this;
 
+
+	InitWsaAsynSelect(); //start wsaasynselect
+
 	return TRUE;  // 除非将焦点设置到控件，否则返回 TRUE
 }
 
@@ -211,16 +214,10 @@ void CmfctcpaDlg::OnBnClickedCancel()
 	CDialogEx::OnCancel();
 }
 
-
-void CmfctcpaDlg::OnBnClickedLinkserverButton1()
+void CmfctcpaDlg::InitWsaAsynSelect()
 {
-	// TODO: 在此添加控件通知处理程序代码
-	//CString decimal = _T(m_editPort);
-	
-
-
 	m_definenum = m_server.ReadFileData();
-	
+
 
 	UpdateData(TRUE);
 	if (m_server.StartServer(this->m_hWnd,GetDlgItemInt(IDC_PORT_EDIT2)) == FALSE)
@@ -229,8 +226,8 @@ void CmfctcpaDlg::OnBnClickedLinkserverButton1()
 	}
 	else
 	{
-//		m_bInit=TRUE;
-//		m_bClient=FALSE;
+		//		m_bInit=TRUE;
+		//		m_bClient=FALSE;
 
 		if ( m_editStartTime < 0 && m_editStartTime >24)
 		{
@@ -246,7 +243,7 @@ void CmfctcpaDlg::OnBnClickedLinkserverButton1()
 			m_editStartTime=8;
 			m_editEndtime=18;
 		}
-	
+
 
 		m_editDisplayM.GetWindowTextW(m_outbox);
 		//m_outbox+=_T("\r\n");
@@ -269,7 +266,7 @@ void CmfctcpaDlg::OnBnClickedLinkserverButton1()
 
 		m_editPort.GetWindowTextW(stemp);
 		this->SetDlgItemTextW(IDC_PORT_EDIT2,stemp);
-		
+
 		SetTimer(1, 5000, NULL);
 		m_modushandle.m_newsocket = 0;
 
@@ -278,7 +275,13 @@ void CmfctcpaDlg::OnBnClickedLinkserverButton1()
 		UpdateData(FALSE);
 	}
 
+}
 
+void CmfctcpaDlg::OnBnClickedLinkserverButton1()
+{
+	// TODO: 在此添加控件通知处理程序代码
+	//CString decimal = _T(m_editPort);
+	InitWsaAsynSelect();
 }
 
 
